@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+             <!-- Background image for card set in CSS! -->
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Register</h5>
+            <form  [formGroup]="registerForm" (ngSubmit)="registerUser()">
+              <div class="form-label-group">
+                <input type="text" id="inputUserame" class="form-control" placeholder="Username" formControlName="name" required autofocus>
+                <label for="inputUserame">User</label>
+                <div *ngIf="myusername.touched && myusername.invalid" class="text-danger">
+                    <p *ngIf="myusername.errors.required">Username is required</p>
+                    <p *ngIf="myusername.errors.minlength">Username must contains 4 chars</p>
+                    <p *ngIf="myusername.errors.pattern">Invalid Username</p>
+                  </div>
+              </div>
+
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email" required>
+                <label for="inputEmail">Email</label>
+                <div *ngIf="myemail.touched && myemail.invalid">
+                    <small *ngIf="myemail.errors.required" class="text-danger">Email is required<br></small>
+                    <small *ngIf="myemail.errors.email" class="text-danger">Invalid Email<br></small>
+                </div>
+              </div>
+              
+              <hr>
+
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="password"  required>
+                <label for="inputPassword">Password</label>
+                <div *ngIf="mypassword.touched && mypassword.invalid" class="text-danger">
+                    <p *ngIf="mypassword.errors.required">Password is required</p>
+                    <p *ngIf="mypassword.errors.minlength">Password must contains 8 chars at least</p>
+                  </div>
+              </div>
+              
+              <div class="form-label-group">
+                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" formControlName="repassword" required>
+                <label for="inputConfirmPassword">Confirm password</label>
+                <div *ngIf="myrepassword.valid && myrepassword.value != mypassword.value" class="text-danger">
+                    The passwords entered do not match
+                </div>
+              </div>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="registerForm.invalid || myrepassword.value != mypassword.value" type="submit">Register</button>
+              <a class="d-block text-center mt-2 small" routerLink="/login" href="#">Sign In</a>
+              <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<app-footer></app-footer>
